@@ -4,7 +4,7 @@ Visual Code :
 - Choose Maven 
 - Choose Maven Quickstart
 
-in Pom xml, copy past or import this library that can you get from here "link"
+in Pom xml, copy past or import this library that can you get from here "https://github.com/albertSuhardi/automation-web-bibit/blob/main/pom.xml"
 in test/java/com/bibitweb make 3 directory 
 pages    : class that used for access the element that we choose 
 runners  : Action or your test code that will run Given When Then
