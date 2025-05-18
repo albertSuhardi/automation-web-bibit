@@ -26,10 +26,28 @@ public class SearchStepDef {
         WebDriverManager.firefoxdriver().setup();
 
         FirefoxProfile profile = new FirefoxProfile(
-            new File("/Users/bytedance/Library/Application Support/Firefox/Profiles/t7nxi3o7.default-release")
+            new File("/Users/myuser/Library/Application Support/Firefox/Profiles/t7nxi3o7.default-release")
         );
 
         FirefoxOptions options = new FirefoxOptions();
+
+        // --- Chrome (opsional) ---
+        /*
+        WebDriverManager.chromedriver().setup();
+
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("user-data-dir=/Users/myuser/Library/Application Support/Google/Chrome");
+        chromeOptions.addArguments("profile-directory=Default");
+
+        driver = new ChromeDriver(chromeOptions);
+        */
+
+
+        // --- Safari (opsional, hanya jika Safari Driver aktif) ---
+        /*
+        driver = new SafariDriver(); // Tidak perlu setup WebDriverManager untuk Safari
+        */
+
         options.setProfile(profile);
 
         driver = new FirefoxDriver(options);
