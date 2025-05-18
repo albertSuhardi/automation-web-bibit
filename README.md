@@ -13,6 +13,6 @@ stepdefs : proxy or connect features with stepdefs
 type mvn test , code will running
 
 Notes : 
-- Cause i don't get test data, you need to change phune number, pin, and otp for login in resources/features/login.features
+- Cause i don't get test data, you need to change pin for login in resources/features/login.features
 - I'm using firefox, if you want to use another browser need to add it manually in stepdefs/SearchStepDef.java
 - You need to change path in stepdefs/SearchStepDef.java, make sure you used your own path browser

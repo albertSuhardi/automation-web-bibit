@@ -21,8 +21,8 @@ public class SearchStepDef {
     private WebDriver driver;
     private ExplorePages homePage;
 
-    @Given("User opens the Bibit homepage")
-    public void user_opens_the_bibit_homepage() {
+    @Given("User opens the Bibit homepage with logged-in profile with pin {string}")
+    public void user_opens_the_bibit_homepage_and_login(String pin) throws InterruptedException {
         WebDriverManager.firefoxdriver().setup();
 
         FirefoxProfile profile = new FirefoxProfile(
@@ -50,49 +50,40 @@ public class SearchStepDef {
 
         options.setProfile(profile);
 
+        options.setProfile(profile);
+
         driver = new FirefoxDriver(options);
         driver.get("https://bibit.id/id");
 
         homePage = new ExplorePages(driver);
-    }
 
-    @Then("Login and click login button {string}")
-    public void login_button_should_be_visible(String phoneNumber) {
         assertTrue(homePage.isLoginButtonVisible());
         homePage.clickLoginButton();
-        assertTrue(homePage.isFieldLoginVisible());
-        homePage.fillPhoneNumber(phoneNumber);
-        homePage.clickLoginButtonTwo();
-    }
 
-    @And("User enters OTP {string} dan pin {string}")
-    public void user_enters_otp(String otp, String pin) {
-        //homePage.fillOTP(otp); // Buat metode ini di Page Object
-        // homePage.clickLoginMethodEmail();
-        // homePage.clickLoginMethodMissedCall();
-        homePage.clickLoginMethodSMS();
-        homePage.clickPilihButton();
-        assertTrue(homePage.isOTPNumberPage());
-
-        for (char digit : otp.toCharArray()) {
-            homePage.clickOTPNumber(digit);
-        }
-
-        assertTrue(homePage.isPinPage());
+        Thread.sleep(3000);
 
         for (char digit : pin.toCharArray()) {
             homePage.clickOTPNumber(digit);
         }
 
         homePage.clickLanjutButton();
+        Thread.sleep(5000);
+        assertTrue(homePage.isExploreButtonVisible());
     }
 
-    @Then("User should be redirected to homepage account and search investor {string}")
-    public void user_should_be_redirected_to_homepage(String manajemen){
-        assertTrue(homePage.isSearchButton());
-        homePage.clickSearchButton();
-        assertTrue(homePage.isSearchInputVisible());
-        homePage.clickSearchFieldTrigger();
-        homePage.fillInSearchField(manajemen);
+    @And("User clicks Explore")
+    public void user_should_be_redirected_to_homepage() {
+        homePage.clickExploreButton();
+        assertTrue(homePage.isExploreTitleVisible());
+        homePage.clickExploreSearchFieldVisible();
+        assertTrue(homePage.isSearchTopRowVisible());
     }
+
+    @Then("User sees search field and types {string}")
+    public void user_search_field_and_type(String manajemen) throws InterruptedException{
+        homePage.searchProdukInvestasi(manajemen);
+        Thread.sleep(2000);
+        assertTrue(homePage.isSearchTextVisible("Saham"));
+    }
+
 }
